@@ -5,12 +5,26 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     // Movement Speed
-    public float speed = 100.0f;
+    public float initialSpeed = 150.0f;
+    private float speedIncrement = 5.0f;  // Incremento de velocidad
+    private float incrementInterval = 2.5f;
+    public float maxSpeed = 400.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.up * speed;
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.up * initialSpeed;
+        StartCoroutine(IncreaseSpeedOverTime());
+    }
+
+    IEnumerator IncreaseSpeedOverTime()
+    {
+        while (initialSpeed < maxSpeed)
+        {
+            yield return new WaitForSeconds(incrementInterval);
+            initialSpeed += speedIncrement;
+            GetComponent<Rigidbody2D>().linearVelocity = GetComponent<Rigidbody2D>().linearVelocity.normalized * initialSpeed;
+        }
     }
 
     float hitFactor(Vector2 ballPos, Vector2 racketPos, float racketWidth)
@@ -33,7 +47,7 @@ public class Ball : MonoBehaviour
             Vector2 dir = new Vector2(x, 1).normalized;
 
             // Set Velocity with dir * speed
-            GetComponent<Rigidbody2D>().linearVelocity = dir * speed;
+            GetComponent<Rigidbody2D>().linearVelocity = dir * initialSpeed;
         }
     }
 }

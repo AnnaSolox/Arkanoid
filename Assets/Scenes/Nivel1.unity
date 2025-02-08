@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30472ae6c7771404480beb97776b2674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 6
+  rows: 5
 --- !u!4 &983572915
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10cc7a5070aac49809bd9d80b06ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  initialSpeed: 150
+  maxSpeed: 350
+  racket: {fileID: 0}
 --- !u!50 &2035206820
 Rigidbody2D:
   serializedVersion: 5
@@ -1265,7 +1267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10cc7a5070aac49809bd9d80b06ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  initialSpeed: 150
+  maxSpeed: 400
+  racket: {fileID: 0}
 --- !u!212 &2035206823
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1330,7 +1334,7 @@ Transform:
   m_GameObject: {fileID: 2035206818}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5052533, y: -0.48568535, z: 0}
+  m_LocalPosition: {x: 0, y: -82.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
