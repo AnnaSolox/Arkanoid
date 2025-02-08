@@ -3,11 +3,11 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     public int rows = 5;    // Número de filas
-    public int columns = 10; // Número de columnas
-    public float blockHeight = 10f;
-    public float minX = -80f;
-    public float maxX = 80f;
-    public float startY = 100f;
+    private int columns = 10; // Número de columnas
+    private float blockHeight = 10f;
+    private float minX = -93f;
+    private float maxX = 93f;
+    private float startY = 100f;
 
     void Start()
     {
@@ -17,21 +17,32 @@ public class BlockSpawner : MonoBehaviour
     void SpawnBlocks()
     {
         float blockWidth = (maxX - minX) / (columns - 1); // Espaciado automático
+        int colorCount = BlockPool.Instance.blockPrefabs.Length; // Número de colores
+        int rowsPerColor = rows / colorCount; // Filas completas por color
+        int extraRows = rows % colorCount; // Filas sobrantes a repartir
 
-        for (int row = 0; row < rows; row++)
+        int currentRow = 0; // Contador de filas generadas
+
+        for (int colorIndex = 0; colorIndex < colorCount; colorIndex++)
         {
-            for (int col = 0; col < columns; col++)
+            int assignedRows = rowsPerColor + (colorIndex < extraRows ? 1 : 0); // Asigna las filas extras de manera justa
+
+            for (int i = 0; i < assignedRows; i++)
             {
-                // Calcular la posición en X dinámicamente
-                float xPos = maxX - (col * blockWidth);
-                float yPos = startY - (row * blockHeight);
+                if (currentRow >= rows) break; // Si ya llenamos todas las filas, salimos
 
-                Vector2 position = new Vector2(xPos, yPos);
-                GameObject block = BlockPool.Instance.GetBlock(position);
+                for (int col = 0; col < columns; col++)
+                {
+                    float xPos = maxX - (col * blockWidth);
+                    float yPos = startY - (currentRow * blockHeight);
+                    Vector2 position = new Vector2(xPos, yPos);
 
-                // Debug para ver si los bloques están en la posición correcta
-                //Debug.Log($"Bloque en fila {row}, columna {col} -> Posición: {position}");
+                    GameObject block = BlockPool.Instance.GetBlock(position, colorIndex);
+                }
+
+                currentRow++; // Pasamos a la siguiente fila
             }
         }
     }
+
 }

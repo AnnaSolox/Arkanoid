@@ -545,12 +545,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30472ae6c7771404480beb97776b2674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 5
-  columns: 5
-  blockHeight: 1
-  minX: -90
-  maxX: 90
-  startY: 100
+  rows: 10
+  columns: 10
+  blockHeight: 10
 --- !u!4 &983572915
 Transform:
   m_ObjectHideFlags: 0
@@ -1136,7 +1133,7 @@ MonoBehaviour:
   - {fileID: 530816206192870157, guid: 4603073f88e462c4aa3e0a7e9825c8ce, type: 3}
   - {fileID: 4818070777789146265, guid: 959ea7afa8fd51c439478dfe3c954ca0, type: 3}
   - {fileID: 7159646565550136912, guid: 51041462b92b36d498871d33f85dd7c9, type: 3}
-  poolSize: 5
+  poolSize: 100
 --- !u!4 &1972353330
 Transform:
   m_ObjectHideFlags: 0
