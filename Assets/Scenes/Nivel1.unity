@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30472ae6c7771404480beb97776b2674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 1
+  rows: 4
 --- !u!4 &983572915
 Transform:
   m_ObjectHideFlags: 0
@@ -1245,8 +1245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreValue: {fileID: 1096146400}
   highScoreValue: {fileID: 16498890}
-  pointsPerBlock: 10
-  paddingZeros: 3
 --- !u!4 &1206001024
 Transform:
   m_ObjectHideFlags: 0
@@ -2124,7 +2122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10cc7a5070aac49809bd9d80b06ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpeed: 150
+  initialSpeed: 200
   maxSpeed: 400
   racket: {fileID: 0}
 --- !u!212 &2035206823

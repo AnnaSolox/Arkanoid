@@ -59,11 +59,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Si no se ha asignado el puntaje actual, lo inicializamos
-        if (currentScore == 0)
-        {
-            AddPoints(0);
-        }
+        ResetScore();
         
     }
 

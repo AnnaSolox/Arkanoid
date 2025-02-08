@@ -11,7 +11,7 @@ public class Ball : MonoBehaviour
     public float maxSpeed = 400.0f;
 
     private Rigidbody2D rb;
-    public Racket racket;  // Referencia al script Racket
+    private Racket racket;  // Referencia al script Racket
     private bool isMoving = false;
 
     // Start is called before the first frame update
