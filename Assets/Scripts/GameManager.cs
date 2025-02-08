@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         totalBlocks--;
         if (totalBlocks <= 0)
         {
-            UIManager.Instance.ShowMessage("¡Nivel completado!", 1f);
+            UIManager.Instance.ShowMessage("Level completed!", 1f);
             //Pausar el juego hasta cargar la siguiente escena
             Time.timeScale = 0f;
             StartCoroutine(WaitAndLoadNextScene(2f));
