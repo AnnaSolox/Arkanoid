@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Transform ball;
-    public float gameOverY = -110f; // Límite donde la bola cae fuera
+    public float gameOverY = -110f;
     private int totalBlocks;
 
     void Awake()
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
         // Obtener el número de nivel actual
         int nivelActual = SceneManager.GetActiveScene().buildIndex + 1;
         // Mostrar mensaje en pantalla
-        UIManager.Instance.ShowMessage($"Nivel {nivelActual}: ¡A jugar!", 1f);
+        UIManager.Instance.ShowMessage($"Level {nivelActual}: Redy...Play!", 1f);
         // Asegurarse de que los bloques estén inicializados antes de contar
         InitializeBlockCount();
         if (ScoreManager.Instance != null)
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     void InitializeBlockCount()
     {
         // Asegurarse de que BlockPool esté completamente inicializado
-        Invoke(nameof(SetTotalBlocks), 0.1f);  // Un pequeño retraso para que los bloques se inicialicen
+        Invoke(nameof(SetTotalBlocks), 0.1f);
     }
 
     void SetTotalBlocks()
@@ -76,11 +76,16 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over!");
         UIManager.Instance.ShowMessage("¡Game Over!", 2f);
-        Invoke(nameof(RestartGame), 2f);
+        //Pausar el juego hasta cargar la siguiente escena
+        Time.timeScale = 0f;
+        StartCoroutine(RestartGame(2f));
     }
 
-    void RestartGame()
+    IEnumerator RestartGame(float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
+        // Restaurar el tiempo
+        Time.timeScale = 1f;
         if (ScoreManager.Instance != null)
         {
             ScoreManager.Instance.ResetScore();
@@ -90,8 +95,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaitAndLoadNextScene(float delay)
     {
-        yield return new WaitForSecondsRealtime(delay); // Usamos WaitForSecondsRealtime para no depender de Time.timeScale
-        Time.timeScale = 1f; // Restaurar el tiempo
+        yield return new WaitForSecondsRealtime(delay);
+        // Restaurar el tiempo
+        Time.timeScale = 1f; 
         LoadNextScene();
     }
 

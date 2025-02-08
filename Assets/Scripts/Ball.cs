@@ -6,12 +6,12 @@ public class Ball : MonoBehaviour
 {
     // Movement Speed
     public float initialSpeed = 150.0f;
-    private float speedIncrement = 5.0f;  // Incremento de velocidad
+    private float speedIncrement = 5.0f;  
     private float incrementInterval = 2.5f;
     public float maxSpeed = 400.0f;
 
     private Rigidbody2D rb;
-    private Racket racket;  // Referencia al script Racket
+    private Racket racket;  
     private bool isMoving = false;
 
     // Start is called before the first frame update

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    // Método que se ejecuta cuando un objeto colisiona con el bloque
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
@@ -13,6 +14,7 @@ public class Block : MonoBehaviour
         }
     }
 
+    // Método para activar el efecto de partículas de explosión
     void ActivateExplosion()
     {
         // Obtener el prefab de partículas basado en el tag del bloque

@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance { get; private set; }  // Singleton para acceder desde cualquier parte
+    public static ScoreManager Instance { get; private set; } 
 
     [Header("UI References")]
-    [SerializeField] private TextMeshProUGUI scoreValue;        // Referencia al texto del puntaje
+    [SerializeField] private TextMeshProUGUI scoreValue;       
     [SerializeField] private TextMeshProUGUI highScoreValue;
 
     [Header("Score Settings")]
-    private int pointsPerBlock = 10;          // Puntos por cada bloque
-    private int paddingZeros = 4;             // Cantidad de ceros a la izquierda (0000)
+    private int pointsPerBlock = 10;          
+    private int paddingZeros = 4;         
 
     private int currentScore = 0;
     private int highScore = 0;
@@ -68,6 +68,7 @@ public class ScoreManager : MonoBehaviour
         // Si no se especifican puntos, usa el valor por defecto
         if (points < 0) points = pointsPerBlock;
 
+        // Añadir puntos al marcador
         currentScore += points;
         Debug.Log("Current Score: " + currentScore);
         UpdateScoreText();
@@ -83,6 +84,7 @@ public class ScoreManager : MonoBehaviour
         PlayerPrefs.SetInt("CurrentScore", currentScore);
     }
 
+    // Método para reiniciar la puntuación
     public void ResetScore()
     {
         currentScore = 0;
@@ -91,6 +93,7 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreText();
     }
 
+    // Método para actualizar el texto de la puntuación
     private void UpdateScoreText()
     {
         if (scoreValue != null)
@@ -102,6 +105,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    // Método para actualizar el texto de la puntuación máxima
     private void UpdateHighScoreText()
     {
         if (highScoreValue != null)
@@ -112,7 +116,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // Método para obtener la puntuación actual (útil para otros scripts)
+    // Método para obtener la puntuación actual
     public int GetCurrentScore()
     {
         return currentScore;

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    public int rows = 5;    // Número de filas
-    private int columns = 10; // Número de columnas
+    public int rows = 5;  
+    private int columns = 10; 
     private float blockHeight = 10f;
     private float minX = -93f;
     private float maxX = 93f;
@@ -16,8 +16,10 @@ public class BlockSpawner : MonoBehaviour
 
     void SpawnBlocks()
     {
-        float blockWidth = (maxX - minX) / (columns - 1); // Espaciado automático
-        int colorCount = BlockPool.Instance.blockPrefabs.Length; // Número de colores
+        // Distancia entre bloques
+        float blockWidth = (maxX - minX) / (columns - 1); 
+        // Cantidad de colores de bloques
+        int colorCount = BlockPool.Instance.blockPrefabs.Length; 
         int rowsPerColor = rows / colorCount; // Filas completas por color
         int extraRows = rows % colorCount; // Filas sobrantes a repartir
 
@@ -25,11 +27,13 @@ public class BlockSpawner : MonoBehaviour
 
         for (int colorIndex = 0; colorIndex < colorCount; colorIndex++)
         {
-            int assignedRows = rowsPerColor + (colorIndex < extraRows ? 1 : 0); // Asigna las filas extras de manera justa
+            // Asigna las filas extras de manera justa
+            int assignedRows = rowsPerColor + (colorIndex < extraRows ? 1 : 0);
 
             for (int i = 0; i < assignedRows; i++)
             {
-                if (currentRow >= rows) break; // Si ya llenamos todas las filas, salimos
+                // Si ya llenamos todas las filas, salimos
+                if (currentRow >= rows) break; 
 
                 for (int col = 0; col < columns; col++)
                 {
@@ -40,7 +44,7 @@ public class BlockSpawner : MonoBehaviour
                     GameObject block = BlockPool.Instance.GetBlock(position, colorIndex);
                 }
 
-                currentRow++; // Pasamos a la siguiente fila
+                currentRow++; 
             }
         }
     }

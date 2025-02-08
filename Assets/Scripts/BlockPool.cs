@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public class BlockPool : MonoBehaviour
 {
-    public GameObject[] blockPrefabs; // Prefabs de bloques de distintos colores
+    public GameObject[] blockPrefabs; 
     private List<GameObject> blockPool = new List<GameObject>();
 
-    public static BlockPool Instance; // Singleton para acceso fácil
+    public static BlockPool Instance; 
 
-    private int activeBlocks = 0; // Contador de bloques activos
+    private int activeBlocks = 0; 
 
     public ParticleSystem redExplosionPrefab;
     public ParticleSystem blueExplosionPrefab;
@@ -26,7 +26,8 @@ public class BlockPool : MonoBehaviour
     {
         foreach (GameObject block in blockPool)
         {
-            if (!block.activeInHierarchy && block.CompareTag(blockPrefabs[blockIndex].tag)) // Asegurar mismo tipo de bloque
+            // Asegurar mismo tipo de bloque
+            if (!block.activeInHierarchy && block.CompareTag(blockPrefabs[blockIndex].tag)) 
             {
                 block.transform.position = position;
                 block.SetActive(true);
@@ -49,7 +50,7 @@ public class BlockPool : MonoBehaviour
     public void ReturnBlock(GameObject block)
     {
         block.SetActive(false);
-        activeBlocks--; // Disminuye el contador de bloques activos
+        activeBlocks--; 
     }
 
     // Método para obtener el número de bloques activos
@@ -58,6 +59,7 @@ public class BlockPool : MonoBehaviour
         return activeBlocks;
     }
 
+    // Método para obtener el prefab de partículas de explosión basado en el tag del bloque que colisionó
     public ParticleSystem GetExplosionPrefab(string blockTag)
     {
         switch (blockTag)
