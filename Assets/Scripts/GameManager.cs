@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,15 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (UIManager.Instance == null)
+        {
+            Debug.LogError("UIManager no está asignado en la escena.");
+            return;
+        }
+        // Obtener el número de nivel actual
+        int nivelActual = SceneManager.GetActiveScene().buildIndex + 1;
+        // Mostrar mensaje en pantalla
+        UIManager.Instance.ShowMessage($"Nivel {nivelActual}: ¡A jugar!", 1f);
         // Asegurarse de que los bloques estén inicializados antes de contar
         InitializeBlockCount();
         if (ScoreManager.Instance != null)
@@ -28,7 +38,7 @@ public class GameManager : MonoBehaviour
     void InitializeBlockCount()
     {
         // Asegurarse de que BlockPool esté completamente inicializado
-        Invoke("SetTotalBlocks", 0.1f);  // Un pequeño retraso para que los bloques se inicialicen
+        Invoke(nameof(SetTotalBlocks), 0.1f);  // Un pequeño retraso para que los bloques se inicialicen
     }
 
     void SetTotalBlocks()
@@ -55,23 +65,38 @@ public class GameManager : MonoBehaviour
         totalBlocks--;
         if (totalBlocks <= 0)
         {
-            LoadNextScene();
+            UIManager.Instance.ShowMessage("¡Nivel completado!", 1f);
+            //Pausar el juego hasta cargar la siguiente escena
+            Time.timeScale = 0f;
+            StartCoroutine(WaitAndLoadNextScene(2f));
         }
     }
 
     void ShowGameOver()
     {
         Debug.Log("Game Over!");
+        UIManager.Instance.ShowMessage("¡Game Over!", 2f);
+        Invoke(nameof(RestartGame), 2f);
+    }
+
+    void RestartGame()
+    {
         if (ScoreManager.Instance != null)
         {
             ScoreManager.Instance.ResetScore();
         }
-        SceneManager.LoadScene(0); 
+        SceneManager.LoadScene(0);
+    }
+
+    IEnumerator WaitAndLoadNextScene(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay); // Usamos WaitForSecondsRealtime para no depender de Time.timeScale
+        Time.timeScale = 1f; // Restaurar el tiempo
+        LoadNextScene();
     }
 
     void LoadNextScene()
     {
-        Debug.Log("¡Siguiente Nivel!");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Cargar siguiente nivel
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
