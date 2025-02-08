@@ -10,8 +10,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreValue;
 
     [Header("Score Settings")]
-    public int pointsPerBlock = 10;          // Puntos por cada bloque
-    public int paddingZeros = 3;             // Cantidad de ceros a la izquierda (000)
+    private int pointsPerBlock = 10;          // Puntos por cada bloque
+    private int paddingZeros = 4;             // Cantidad de ceros a la izquierda (0000)
 
     private int currentScore = 0;
     private int highScore = 0;

@@ -1983,6 +1983,11 @@ MonoBehaviour:
   - {fileID: 530816206192870157, guid: 4603073f88e462c4aa3e0a7e9825c8ce, type: 3}
   - {fileID: 4818070777789146265, guid: 959ea7afa8fd51c439478dfe3c954ca0, type: 3}
   - {fileID: 7159646565550136912, guid: 51041462b92b36d498871d33f85dd7c9, type: 3}
+  redExplosionPrefab: {fileID: 2088871590894813759, guid: 70aec9e9d041b954ab8ffd06ae38fb5c, type: 3}
+  blueExplosionPrefab: {fileID: 15085447402717889, guid: 552b108bbe1f48b46a2b87b1555057df, type: 3}
+  greenExplosionPrefab: {fileID: 7303472089845130122, guid: 054f250b476d27c4c8c8e362a2c27faa, type: 3}
+  pinkExplosionPrefab: {fileID: 625621707174889904, guid: bdead81ead6569848a1f15278f51256c, type: 3}
+  yellowExplosionPrefab: {fileID: 3199346384015752365, guid: 0f4038b612abd1441861fbc5717124d8, type: 3}
 --- !u!4 &1972353330
 Transform:
   m_ObjectHideFlags: 0

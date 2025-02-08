@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ball
+  - BlueBlock
+  - RedBlock
+  - PinkBlock
+  - YellowBlock
+  - GreenBlock
   layers:
   - Default
   - TransparentFX

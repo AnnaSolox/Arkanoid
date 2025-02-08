@@ -10,6 +10,12 @@ public class BlockPool : MonoBehaviour
 
     private int activeBlocks = 0; // Contador de bloques activos
 
+    public ParticleSystem redExplosionPrefab;
+    public ParticleSystem blueExplosionPrefab;
+    public ParticleSystem greenExplosionPrefab;
+    public ParticleSystem pinkExplosionPrefab;
+    public ParticleSystem yellowExplosionPrefab;
+
     void Awake()
     {
         Instance = this;
@@ -50,5 +56,24 @@ public class BlockPool : MonoBehaviour
     public int GetActiveBlockCount()
     {
         return activeBlocks;
+    }
+
+    public ParticleSystem GetExplosionPrefab(string blockTag)
+    {
+        switch (blockTag)
+        {
+            case "RedBlock":
+                return redExplosionPrefab;
+            case "BlueBlock":
+                return blueExplosionPrefab;
+            case "GreenBlock":
+                return greenExplosionPrefab;
+            case "YellowBlock":
+                return yellowExplosionPrefab;
+            case "PinkBlock":
+                return pinkExplosionPrefab;
+            default:
+                return null;
+        }
     }
 }
