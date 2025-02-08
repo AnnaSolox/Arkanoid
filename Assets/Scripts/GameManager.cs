@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     {
         // Asegurarse de que los bloques estén inicializados antes de contar
         InitializeBlockCount();
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.GetCurrentScore();
+        }
     }
 
     // Método para inicializar el contador de bloques
@@ -58,7 +62,11 @@ public class GameManager : MonoBehaviour
     void ShowGameOver()
     {
         Debug.Log("Game Over!");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reinicia la escena actual
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.ResetScore();
+        }
+        SceneManager.LoadScene(0); 
     }
 
     void LoadNextScene()

@@ -6,6 +6,7 @@ public class Block : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
+            ScoreManager.Instance.AddPoints();
             BlockPool.Instance.ReturnBlock(gameObject);
             GameManager.Instance.BlockHidden();
         }

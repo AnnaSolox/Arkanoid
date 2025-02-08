@@ -10,11 +10,45 @@ public class Ball : MonoBehaviour
     private float incrementInterval = 2.5f;
     public float maxSpeed = 400.0f;
 
+    private Rigidbody2D rb;
+    public Racket racket;  // Referencia al script Racket
+    private bool isMoving = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.up * initialSpeed;
-        StartCoroutine(IncreaseSpeedOverTime());
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        
+        // No lanzamos la bola inmediatamente
+        rb.linearVelocity = Vector2.zero;
+        
+        // Si no tenemos la referencia al racket, la buscamos
+        if (racket == null)
+        {
+            racket = FindFirstObjectByType<Racket>();
+        }
+    }
+
+    void Update()
+    {
+        if (!isMoving && racket != null)
+        {
+            // Seguir al racket mientras no se haya lanzado
+            transform.position = new Vector3(
+                racket.transform.position.x,
+                racket.transform.position.y + 8f,
+                0
+            );
+
+            // Revisar si se debe lanzar la bola
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                isMoving = true;
+                rb.linearVelocity = Vector2.up * initialSpeed;
+                StartCoroutine(IncreaseSpeedOverTime());
+            }
+        }
     }
 
     IEnumerator IncreaseSpeedOverTime()
@@ -23,7 +57,7 @@ public class Ball : MonoBehaviour
         {
             yield return new WaitForSeconds(incrementInterval);
             initialSpeed += speedIncrement;
-            GetComponent<Rigidbody2D>().linearVelocity = GetComponent<Rigidbody2D>().linearVelocity.normalized * initialSpeed;
+            rb.linearVelocity = rb.linearVelocity.normalized * initialSpeed;
         }
     }
 
